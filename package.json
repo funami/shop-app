@@ -6,8 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --watch",
-    "vercel-build": "npm run prepare && next build"
+    "test": "jest --watch"
   },
   "dependencies": {
     "axios": "^0.24.0",
