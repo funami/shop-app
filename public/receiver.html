@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charSet="utf-8"/>
+    <script type="application/javascript">
+      var process = (event) =>{
+        console.log("process event", event)
+        localStorage.setItem("jwt_token", JSON.stringify( event.data || {}))
+        console.log("process events stored getItem", localStorage.getItem("jwt_token"))
+      }
+      var origin = "http://127.0.0.1:3000"
+      window.addEventListener(
+        "message",
+        (event) => {
+          if (origin !== event.origin) return
+          process(event)
+        },
+        false
+      )
+      console.log("origin", origin)
+      console.log("current jwt", localStorage.getItem("jwt_token"))
+      if (window.parent.location !== window.location){
+        console.log("send message receiverReady")
+        window.parent.postMessage("receiverReady", origin)
+      }else{
+        console.log("not send receiverReady")
+      }
+        
+      const search = decodeURIComponent(window.location.search.replace(/^\?/, ""))
+      console.log(search)
+      localStorage.setItem("jwt_token",search)
+    </script>
+</head>
+<body>HELLO</body>
+</html>
+
