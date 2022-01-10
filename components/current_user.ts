@@ -27,10 +27,17 @@ export default class CurrentUser {
   get token() {
     return this.user?.token ? this.user?.token : null
   }
+
+  userValue(_user: User | {}): User | null {
+    return Object.keys(_user || {}).length > 0 ? (_user as User) : null
+  }
   loadFromCookie() {
-    const user = JSON.parse(Cookies.get(cartUserInfoKey) || "{}")
-    const changed = diff(this.user, user)
+    const cookieValue = JSON.parse(Cookies.get(cartUserInfoKey) || "{}")
+    const user = this.userValue(cookieValue)
+
+    const changed = diff(this._user, user)
     if (changed) {
+      //console.log(changed)
       this._user = user
       if (this.cb) this.cb(this.user)
     }
