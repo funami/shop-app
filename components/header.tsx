@@ -3,7 +3,7 @@ import CurrentUser, { User } from "./current_user"
 import style from "../styles/Header.module.scss"
 import Link from "next/link"
 
-const cartUrl = process.env.NEXT_PUBLIC_CART_URL
+const cartUrl = process.env.NEXT_PUBLIC_MYPAGE_URL
 
 const Header = () => {
   const [user, setUser] = useState<User | null | undefined>(undefined)
