@@ -13,7 +13,7 @@ export type UserChangedEventCallBack = (user: User | null) => void
 
 const tokenGeneratorApiEndpoint = process.env.NEXT_PUBLIC_TOKEN_API_ENDPOINT
 
-export default class CurrentUser {
+export default class Session {
   public _user: User | null = null
   public tid: NodeJS.Timer | null = null
   public cb?: UserChangedEventCallBack

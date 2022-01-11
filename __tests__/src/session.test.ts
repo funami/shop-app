@@ -1,6 +1,6 @@
 import Cookies from "js-cookie"
 import { advanceTo, clear } from "jest-date-mock"
-import CurrentUser, { cartUserInfoKey } from "../../src/current_user"
+import Session, { cartUserInfoKey } from "../../src/session"
 
 jest.mock("axios")
 import axios, { AxiosInstance } from "axios"
@@ -26,7 +26,7 @@ const cookie3 = {
 
 test("loadFromCookie", async () => {
   Cookies.set(cartUserInfoKey, JSON.stringify(cookie)) // すでにcookieが存在している
-  const current_user = new CurrentUser()
+  const current_user = new Session()
   expect(current_user.user).toMatchObject(cookie) // constractor時に一度loadFromCookieしているので、ここですでにuserが読み込まれている
 
   // loadFromCookieでcookieを確認。変化はない
@@ -49,7 +49,7 @@ test("user is aleady signined at cart.app", async () => {
   const mockCallback = jest.fn((x) => x)
 
   Cookies.remove(cartUserInfoKey) // 最初はcookieが存在しない状態から始める
-  const current_user = new CurrentUser()
+  const current_user = new Session()
   expect(current_user.user).toBeNull()
 
   Cookies.set(cartUserInfoKey, JSON.stringify(cookie)) // すでにcookieが存在している
@@ -114,7 +114,7 @@ test("user is aleady signined at cart.app", async () => {
 })
 
 test("_verifyTokenExpired", () => {
-  const current_user = new CurrentUser()
+  const current_user = new Session()
   expect(current_user._verifyTokenExpired(cookie.token)).toBeTruthy()
 
   advanceTo(new Date(1641714987000)) // 有効
@@ -126,7 +126,7 @@ test("_verifyTokenExpired", () => {
 })
 
 test("firebase_custom_token", async () => {
-  const current_user = new CurrentUser()
+  const current_user = new Session()
 
   // cookie なし
   Cookies.remove(cartUserInfoKey)

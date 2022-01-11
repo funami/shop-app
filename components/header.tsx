@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import CurrentUser, { User } from "../src/current_user"
+import Session, { User } from "../src/session"
 import style from "../styles/Header.module.scss"
 import Link from "next/link"
 import Grid from "@mui/material/Grid"
@@ -11,7 +11,7 @@ const Header = () => {
   const [token, setToken] = useState<string | null>(null)
 
   useEffect(() => {
-    const currentUser = new CurrentUser()
+    const currentUser = new Session()
     currentUser.start((user) => {
       console.log("user state change", user)
       if (user) {
