@@ -1,6 +1,6 @@
 import Cookies from "js-cookie"
 import { advanceTo, clear } from "jest-date-mock"
-import CurrentUser, { cartUserInfoKey } from "../../components/current_user"
+import CurrentUser, { cartUserInfoKey } from "../../src/current_user"
 
 jest.mock("axios")
 import axios, { AxiosInstance } from "axios"
