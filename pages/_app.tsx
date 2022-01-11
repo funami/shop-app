@@ -1,15 +1,34 @@
 import "../styles/globals.css"
-import styles from "../styles/Home.module.css"
+import { ThemeProvider } from "@mui/material/styles"
+import CssBaseline from "@mui/material/CssBaseline"
+import { CacheProvider, EmotionCache } from "@emotion/react"
+import theme from "../src/theme"
+import createEmotionCache from "../src/createEmotionCache"
 import type { AppProps } from "next/app"
 import Header from "../components/header"
+import Container from "@mui/material/Container"
 
-function MyApp({ Component, pageProps }: AppProps) {
+// Client-side cache, shared for the whole session of the user in the browser.
+const clientSideEmotionCache = createEmotionCache()
+
+interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache
+}
+// https://github.com/mui-org/material-ui/tree/master/examples/nextjs-with-typescript
+// nextjsでmaterial uiを使うため、↑を参考に実装。CacheProviderが何者か、よくわかってない
+function MyApp(props: MyAppProps) {
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
   return (
     <>
-      <Header />
-      <div className={styles.container}>
-        <Component {...pageProps} />
-      </div>
+      <CacheProvider value={emotionCache}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Header />
+          <Container>
+            <Component {...pageProps} />
+          </Container>
+        </ThemeProvider>
+      </CacheProvider>
     </>
   )
 }
