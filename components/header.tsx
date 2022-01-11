@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import CurrentUser, { User } from "./current_user"
+import CurrentUser, { User } from "../src/current_user"
 import style from "../styles/Header.module.scss"
 import Link from "next/link"
 import Grid from "@mui/material/Grid"
