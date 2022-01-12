@@ -10,13 +10,3 @@ export const firebaseConfig = JSON.parse(
 export const firebaseApp = initializeApp(firebaseConfig)
 export const db = getFirestore()
 export const auth = getAuth()
-
-export const clearFirestore = async (
-  projectId: string,
-  host: string,
-  port: number
-) => {
-  return axios.delete(
-    `http://${host}:${port}/emulator/v1/projects/${projectId}/databases/(default)/documents`
-  )
-}

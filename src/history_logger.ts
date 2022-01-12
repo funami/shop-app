@@ -37,15 +37,16 @@ export const HistoryLogger = {
     _limit: number = 100,
     lastVisible?: string
   ) => {
-    console.log({ lastVisible, _limit })
-    const q = lastVisible
+    const lastDoc = lastVisible
+      ? await getDoc(doc(db, "users", uid, category, lastVisible))
+      : null
+
+    const q = lastDoc
       ? query(
           collection(db, "users", `${uid}`, category),
           where("uid", "==", uid),
           orderBy("datetime", "desc"),
-          startAfter(
-            await getDoc(doc(db, "users", uid, category, lastVisible))
-          ),
+          startAfter(lastDoc),
           limit(_limit)
         )
       : query(
