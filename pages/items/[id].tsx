@@ -1,8 +1,8 @@
-import { GetStaticProps, GetStaticPaths } from "next"
+import { GetStaticProps } from "next"
 import Link from "next/link"
 import styles from "../../styles/Item.module.scss"
-
 import { Product } from "./index"
+
 const Item = ({ item }: { item: Product }) => {
   return (
     <>

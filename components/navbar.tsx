@@ -6,9 +6,8 @@ import Grid from "@mui/material/Grid"
 
 const cartUrl = process.env.NEXT_PUBLIC_MYPAGE_URL
 
-const Header = () => {
-  const [user, setUser] = useState<User | null | undefined>(undefined)
-  const [token, setToken] = useState<string | null>(null)
+const Navbar = ({ user }: { user: User | null | undefined }) => {
+  /*   const [user, setUser] = useState<User | null | undefined>(undefined)
 
   useEffect(() => {
     const currentUser = new Session()
@@ -24,7 +23,7 @@ const Header = () => {
     return () => {
       currentUser.stop()
     }
-  }, [])
+  }, []) */
   return (
     <Grid container fontSize={14} className={style.header}>
       <Grid container paddingX={2}>
@@ -54,4 +53,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default Navbar
