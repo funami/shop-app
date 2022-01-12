@@ -145,7 +145,7 @@ describe("HistoryLogger.get", () => {
   test("get with limit", async () => {
     const queryResult = await HistoryLogger.get("12", "products", 2).then(
       (ret) => {
-        console.log(ret)
+        // console.log(ret)
         return ret
       }
     )
@@ -153,7 +153,7 @@ describe("HistoryLogger.get", () => {
 
     await expect(
       HistoryLogger.get("12", "products", 100, "843").then((ret) => {
-        console.log(ret)
+        // console.log(ret)
         return ret
       })
     ).resolves.toEqual([data1])

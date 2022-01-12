@@ -1,4 +1,4 @@
-import { firebaseApp, db } from "./firebase"
+import { db } from "./firebase"
 import {
   collection,
   query,
@@ -17,14 +17,23 @@ export type History = {
   docId: string
   category: string
   url: string
-  datetime: Date
-  uid: string
+  datetime?: Date
+  uid?: string
   count?: number
 }
 export const HistoryLogger = {
   log: async (data: History) => {
+    if (!data.datetime) {
+      data.datetime = new Date()
+    }
     const newLogRef = doc(collection(db, "histories"))
-    const userHistoryRef = doc(db, "users", data.uid, data.category, data.docId)
+    const userHistoryRef = doc(
+      db,
+      "users",
+      data.uid || "",
+      data.category,
+      data.docId
+    )
     const result = await runTransaction<History>(db, async (transaction) => {
       transaction.set(newLogRef, data).set(userHistoryRef, data)
       return data
@@ -45,14 +54,14 @@ export const HistoryLogger = {
       ? query(
           collection(db, "users", `${uid}`, category),
           where("uid", "==", uid),
-          orderBy("datetime", "desc"),
+          //orderBy("datetime", "desc"),
           startAfter(lastDoc),
           limit(_limit)
         )
       : query(
           collection(db, "users", `${uid}`, category),
           where("uid", "==", uid),
-          orderBy("datetime", "desc"),
+          //orderBy("datetime", "desc"),
           limit(_limit)
         )
     const documentSnapshots = await getDocs(q)

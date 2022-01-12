@@ -37,7 +37,6 @@ export default class Session {
 
     const changed = diff(this._user, user)
     if (changed) {
-      //console.log(changed)
       this._user = user
       if (this.cb) this.cb(this.user)
     }
