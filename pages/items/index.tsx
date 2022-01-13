@@ -35,7 +35,7 @@ export const getHotpepperData = async (): Promise<Product[]> => {
 
 const MediaCard = (item: Product) => {
   return (
-    <Card sx={{ maxWidth: 200, minHeight: 300 }}>
+    <Card sx={{ maxWidth: 162, minHeight: 300 }}>
       <CardMedia
         component="img"
         height="150"
@@ -60,9 +60,9 @@ const MediaCard = (item: Product) => {
 
 const Item = ({ items }: { items: Product[] }) => {
   return (
-    <Grid container>
+    <Grid container alignItems="center" justifyContent="center">
       {items.map((item) => (
-        <Grid key={item.id} marginRight={2} marginBottom={1}>
+        <Grid key={item.id} marginRight={1} marginBottom={1}>
           <MediaCard {...item}></MediaCard>
         </Grid>
       ))}
