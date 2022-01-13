@@ -54,14 +54,14 @@ export const HistoryLogger = {
       ? query(
           collection(db, "users", `${uid}`, category),
           where("uid", "==", uid),
-          //orderBy("datetime", "desc"),
+          orderBy("datetime", "desc"),
           startAfter(lastDoc),
           limit(_limit)
         )
       : query(
           collection(db, "users", `${uid}`, category),
           where("uid", "==", uid),
-          //orderBy("datetime", "desc"),
+          orderBy("datetime", "desc"),
           limit(_limit)
         )
     const documentSnapshots = await getDocs(q)
